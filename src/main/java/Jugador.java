@@ -14,8 +14,11 @@ public class Jugador {
 
         }
 
+    public String getNombre() {
+        return nombre;
+    }
 
-        public void anyadirCarta(Carta carta){
+    public void anyadirCarta(Carta carta){
 
         mano = Arrays.copyOf(mano,mano.length+1);
         mano[mano.length-1] = carta;
@@ -36,7 +39,7 @@ public class Jugador {
 
         @Override
         public String toString(){
-        return "Jugador"+nombre +" "+"Mano: "+ Arrays.toString(mano);
+        return "Jugador "+nombre +" Puntuacion :" + obtenerPuntuacion()+" Mano: "+ Arrays.toString(mano);
         }
 
 

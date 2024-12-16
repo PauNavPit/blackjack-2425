@@ -24,9 +24,9 @@ public void start(){
     for (Jugador jugador:jugadores){
         juegaJugador(jugador);
     }
-    juegaJugador(banca);
+    juegaBanca(banca);
 
-    mostrarGanador;
+    //mostrarGanador;
 
 
 
@@ -39,21 +39,57 @@ public void start(){
     }
 
     private void juegaJugador(Jugador player){
-         boolean verifica = true;
 
-        while (verifica){
-            System.out.println("Turno de :"+ player);
+        System.out.println("Turno para : "+ player.getNombre());
+        System.out.println(player);
+        char medidor =Input.getchar("Indique S si quieres otra carta o cualquier otra letra para que no te de mas: ");
 
-            char medidor =Input.getchar("Indique S si quieres otra carta o N si quieres plantarte");
+        while (medidor=='S' && player.obtenerPuntuacion()>0){
             player.anyadirCarta(baraja.repartirEncima());
-            if (medidor!= 'S' || player.obtenerPuntuacion()>21){
-                verifica= false;
-            }
+            System.out.println(player);
+            if (player.obtenerPuntuacion()>=0)
+                medidor = Input.getchar("Indique S si quieres otra carta o cualquier otra letra para que no te de mas: ");
+
+
+            else
+                System.out.println(player.getNombre()+ " te has pasado !! ");
+
         }
 
 
 
         }
+
+
+    private void juegaBanca(Jugador playerBanca){
+        int maxPuntuacion= maxPuntuacionJugadores();
+        System.out.println("Turno para : "+ playerBanca.getNombre());
+        System.out.println(playerBanca);
+
+        while (playerBanca.obtenerPuntuacion()<maxPuntuacion && playerBanca.obtenerPuntuacion()>=0){
+            playerBanca.anyadirCarta(baraja.repartirEncima());
+            System.out.println(playerBanca);
+            if (playerBanca.obtenerPuntuacion()<0)
+                System.out.println("La banca se ha pasado !! ");
+
+        }
+
 
     }
 
+private int maxPuntuacionJugadores(){
+        int mayor = Integer.MIN_VALUE;
+        for (Jugador jugador:jugadores){
+            if (jugador.obtenerPuntuacion()>mayor) {
+                mayor = jugador.obtenerPuntuacion();}
+        }
+    return mayor;
+
+
+
+
+
+
+
+}
+}
